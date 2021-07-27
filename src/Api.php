@@ -257,7 +257,8 @@ class Api
                     return null;
             }
         } catch (RequestException $e) {
-            throw ApiException::create($e);
+            $actualError = $e->getResponse()->getBody()->getContents();
+            throw ApiException::create($e, $actualError);
         }
     }
 
